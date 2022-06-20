@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Expression input</title>
+</head>
+
+<body>
+<form th:method="POST" th:action="@{/api/v1/expressions/update/{id}(id=${expression.id})}" th:object="${expression}" >
+    <label for="id"> ID: </label>
+    <span id="id" th:text="${expression.id}"> ID </span>
+    <br>
+
+    <label for="oldValue"> Old value: </label>
+    <span id="oldValue" th:text="${expression.value}"> oldValue </span>
+    <br>
+
+    <label for="oldResult"> Old result: </label>
+    <span id="oldResult" th:text="${expression.result}"> oldResult </span>
+    <br>
+    <br>
+
+
+    <label for="newValue"> New value </label>
+    <input name="newValue" type="text" id="newValue">
+    <br>
+
+    <input type="submit" value="Update">
+</form>
+</body>
+
+</html>

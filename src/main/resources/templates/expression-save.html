@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Expression input</title>
+</head>
+
+<body>
+<form method="POST" th:action="@{/api/v1/expressions}">
+    <label for="value"> Value </label>
+    <input name="value" type="text" id="value">
+
+    <input type="submit" value="Add">
+</form>
+</body>
+
+</html>
