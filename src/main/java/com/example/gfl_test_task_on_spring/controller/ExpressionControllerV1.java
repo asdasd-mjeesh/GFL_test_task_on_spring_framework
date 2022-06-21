@@ -3,9 +3,12 @@ package com.example.gfl_test_task_on_spring.controller;
 import com.example.gfl_test_task_on_spring.dto.ExpressionDto;
 import com.example.gfl_test_task_on_spring.dto.ExpressionFilter;
 import com.example.gfl_test_task_on_spring.entity.Expression;
+import com.example.gfl_test_task_on_spring.exception.ExpressionAlreadyExistException;
 import com.example.gfl_test_task_on_spring.mapper.ExpressionMapper;
 import com.example.gfl_test_task_on_spring.service.ExpressionService;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +30,11 @@ public class ExpressionControllerV1 {
 
     @PostMapping("")
     public String save(@RequestParam(name = "value") String expressionValue) {
-        expressionService.save(expressionValue);
+        try {
+            expressionService.save(expressionValue);
+        } catch (Exception e) {
+            throw new ExpressionAlreadyExistException(e.getMessage());
+        }
         return "redirect:expressions/1";
     }
 

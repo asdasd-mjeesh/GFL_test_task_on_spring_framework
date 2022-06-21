@@ -40,11 +40,11 @@ public class ExpressionService {
         expressionValue = expressionValue.replace(" ", "");
         if (!expressionResolver.resolve(expressionValue)) {
             throw new InvalidExpressionException("invalid expression");
-        } else {
-            Double result = calculator.calculate(expressionValue);
-            Expression expression = new Expression(expressionValue, result);
-            return expressionRepository.save(expression);
         }
+
+        Double result = calculator.calculate(expressionValue);
+        Expression expression = new Expression(expressionValue, result);
+        return expressionRepository.save(expression);
     }
 
     public Optional<Expression> findById(Long id) {
